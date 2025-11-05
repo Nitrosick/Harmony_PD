@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+#__nuxt {
+  font-family: $font-main;
+  font-size: fluid(24, 18);
+  line-height: 1.2;
+  background-color: $color-background;
+  color: $color-text;
+}
+
+body.lock-scroll {
+  overflow: hidden;
+}
+
+.content {
+  max-width: $content-width;
+  margin: 0 auto;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: $color-text;
+  cursor: pointer;
+}
+
+nuxt-link {
+  cursor: pointer;
+}
+
+p {
+  margin: 0;
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+h1 {
+  font-size: fluid(48, 32);
+  font-weight: 600;
+}
+
+h2 {
+  font-size: fluid(38, 28);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: fluid(34, 26);
+  font-weight: 700;
+}
+
+h4 {
+  font-size: fluid(28, 24);
+  font-weight: 700;
+}
+
+caption {
+  font-size: fluid(18, 14);
+  line-height: 1.1;
+}
+
+select {
+  background-color: transparent;
+  color: $color-text;
+  font-size: fluid(24, 18);
+  border: none;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.plug {
+  flex-grow: 1;
+}
+
+::selection {
+  color: $color-background;
+  background-color: var(--color-dark-grey-blue);
+}
+
+// ::-moz-selection {
+//   color: var(--color-white);
+//   background-color: var(--color-orange-1);
+// }
+
+// ::-webkit-scrollbar {
+//   width: 0;
+// }
