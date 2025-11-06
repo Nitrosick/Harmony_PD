@@ -19,7 +19,7 @@
 
 <style lang="scss" scoped>
 .layout {
-  min-height: 100vh;
+  min-height: calc(100vh - rem(40));
   min-width: $min-width;
   display: flex;
   flex-direction: column;

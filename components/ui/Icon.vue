@@ -24,9 +24,9 @@ const props = defineProps({
   aspect-ratio: 1/1;
 }
 
-.icon-s { width: rem(15) }
-.icon-m { width: rem(20) }
-.icon-l { width: rem(30) }
+.icon-s { width: rem(32) }
+.icon-m { width: rem(40) }
+.icon-l { width: rem(48) }
 
 .icon {
   width: 100%;

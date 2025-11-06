@@ -1,16 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 * {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  letter-spacing: -1px;
 }
 
 #__nuxt {
   font-family: $font-main;
-  font-size: fluid(24, 18);
+  font-size: fluid(22, 18);
   line-height: 1.2;
   background-color: $color-background;
   color: $color-text;
+  padding: rem(20);
 }
 
 body.lock-scroll {
@@ -18,6 +20,7 @@ body.lock-scroll {
 }
 
 .content {
+  width: 100%;
   max-width: $content-width;
   margin: 0 auto;
 }
@@ -46,27 +49,27 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: fluid(48, 32);
+  font-size: fluid(44, 32);
   font-weight: 600;
 }
 
 h2 {
-  font-size: fluid(38, 28);
-  font-weight: 700;
+  font-size: fluid(36, 28);
+  font-weight: 500;
 }
 
 h3 {
   font-size: fluid(34, 26);
-  font-weight: 700;
+  font-weight: 500;
 }
 
 h4 {
   font-size: fluid(28, 24);
-  font-weight: 700;
+  font-weight: 500;
 }
 
-caption {
-  font-size: fluid(18, 14);
+caption, .caption {
+  font-size: fluid(16, 12);
   line-height: 1.1;
 }
 
@@ -89,15 +92,31 @@ button {
 }
 
 ::selection {
-  color: $color-background;
+  color: var(--color-light-blue);
   background-color: var(--color-dark-grey-blue);
 }
 
-// ::-moz-selection {
-//   color: var(--color-white);
-//   background-color: var(--color-orange-1);
-// }
+::-moz-selection {
+  color: var(--color-light-blue);
+  background-color: var(--color-dark-grey-blue);
+}
 
-// ::-webkit-scrollbar {
-//   width: 0;
-// }
+::-webkit-scrollbar {
+  width: rem(20);
+  height: rem(20);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin: rem(16);
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary;
+  border: rem(4) solid $color-background;
+  border-radius: 1000rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $color-text;
+}

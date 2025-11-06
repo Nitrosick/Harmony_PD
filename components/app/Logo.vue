@@ -1,19 +1,19 @@
 <template>
-  <!-- <NuxtLink :to="$localePath('/')">
+  <NuxtLink to="/">
     <img
-      src="/images/logo_1.svg"
+      src="/images/logo.svg"
       alt="logo"
       class="logo"
       loading="lazy"
-      width="156"
-      height="42"
+      width="224"
+      height="48"
     >
-  </NuxtLink> -->
+  </NuxtLink>
 </template>
 
 <style lang="scss" scoped>
 .logo {
-  // max-width: fluid(156, 108);
-  // max-height: fluid(42, 26);
+  max-width: fluid(224, 112);
+  max-height: fluid(48, 24);
 }
 </style>

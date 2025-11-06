@@ -1,99 +1,106 @@
 <template>
-  <!-- <NuxtLink
-    v-if="to"
-    :to="$localePath(to)"
-    class="button"
-    :class="{ 'button-adaptable': adaptable }"
-  >
-    <div class="button-text">
-      <span v-if="text">{{ text }}</span>
-      <Icon
-        v-if="icon"
-        :name="icon"
-      />
-    </div>
-  </NuxtLink>
-  <Component
-    v-else
-    :is="href ? 'a' : 'button'"
-    :href="href"
-    :to="to"
-    :download="download"
-    :target="target"
-    class="button"
-  >
-    <div class="button-text">
-      <span v-if="text">{{ text }}</span>
-      <Icon
-        v-if="icon"
-        :name="icon"
-      />
-    </div>
-  </Component> -->
+  <ClientOnly>
+    <NuxtLink
+      v-if="to"
+      :to="to"
+      class="button"
+      :class="{
+        'button-light': theme === 'light',
+        'button-dark': theme === 'dark'
+      }"
+    >
+      <div class="button-text">
+        <slot />
+        <Icon
+          v-if="icon"
+          :name="icon"
+        />
+      </div>
+    </NuxtLink>
+    <Component
+      v-else
+      :is="href ? 'a' : 'button'"
+      :href="href"
+      :to="to"
+      :download="download"
+      :target="target"
+      class="button"
+      :class="{
+        'button-light': theme === 'light',
+        'button-dark': theme === 'dark'
+      }"
+    >
+      <div class="button-text">
+        <slot />
+        <Icon
+          v-if="icon"
+          :name="icon"
+        />
+      </div>
+    </Component>
+  </ClientOnly>
 </template>
 
 <script setup>
-// const props = defineProps({
-//   text: { type: String, default: null },
-//   icon: { type: String, default: null },
-//   href: { type: String, default: undefined },
-//   to: { type: String, default: undefined },
-//   download: { type: [String, Boolean], default: undefined },
-//   adaptable: { type: Boolean, default: true }
-// })
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+  icon: { type: String, default: null },
+  href: { type: String, default: undefined },
+  to: { type: String, default: undefined },
+  download: { type: [String, Boolean], default: undefined },
+  adaptable: { type: Boolean, default: true }
+})
 
-// const target = computed(() => {
-//   const { href } = props
-//   if (!href || href.startsWith('#')) return undefined
-//   return '_blank'
-// })
+const target = computed(() => {
+  const { href } = props
+  if (!href || href.startsWith('#')) return undefined
+  return '_blank'
+})
 </script>
 
 <style lang="scss" scoped>
 .button {
-//   position: relative;
-//   display: inline-flex;
-//   align-items: center;
-//   justify-content: center;
-//   font-family: $font-main;
-//   font-weight: 600;
-//   background-color: $color-text;
-//   color: var(--color-blue);
-//   border-radius: fluid(24, 16);
-//   padding: fluid(25, 15) fluid(100, 57);
-//   overflow: hidden;
-//   transition: color $transition-time;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-main;
+  font-weight: 500;
+  border-radius: $border-radius-card;
+  padding: fluid(20, 16) fluid(40, 32);
+  overflow: hidden;
+  transition: color $transition-time, background-color $transition-time;
 
-//   &-text {
-//     position: relative;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     font-size: fluid(20, 16);
-//     white-space: nowrap;
-//   }
+  &-text {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: fluid(24, 18);
+    white-space: nowrap;
+  }
+}
 
-//   &:hover,
-//   &:focus,
-//   &:active {
-//     color: var(--color-light-blue);
-//   }
-// }
+.button-light {
+  background-color: $color-background;
+  color: $color-text;
 
-// .button-adaptable {
-//   padding: fluid(25, 10) fluid(100, 45);
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--color-accent-blue);
+  }
+}
 
-//   @include bp-sm {
-//     background-color: var(--color-white-o);
-//     color: $color-text;
-//     font-weight: 400;
-//     border: 1px solid var(--color-light-grey);
-//     transition: border-color $transition-time;
+.button-dark {
+  background-color: $primary;
+  color: $color-background;
 
-//     &:hover {
-//       color: $color-text;
-//       border-color: $color-text;
-//     }
-//   }
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: var(--color-accent-blue);
+    color: $color-background;
+  }
 }
 </style>

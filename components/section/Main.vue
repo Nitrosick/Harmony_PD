@@ -1,78 +1,92 @@
 <template>
-  <div class="main">
-    <!-- <Motion
-      class="background"
-      :initial="{
-        scale: 1.15,
-      }"
-      :animate="{
-        scale: 1,
-        transition: { duration: 8 }
-      }"
-    />
-    <h1>{{ $t('main.title') }}</h1>
-    <p
-      class="main-text"
-      v-html="$t('main.description')"
-    />
-    <Button
-      :text="$t('main.contact_us')"
-      to="/#contacts"
-      :adaptable="false"
-    /> -->
+  <div class="main content">
+    <div class="main-about">
+      <h1 class="main-title">
+        Персональные данные ваших
+        клиентов, сотрудников
+        и&nbsp;посетителей&nbsp;— под&nbsp;защитой
+      </h1>
+      <p class="main-text">
+        Harmony Technologies обеспечивает правовую,
+        организационную и&nbsp;техническую защиту персональных
+        данных компаний в&nbsp;соответствии с&nbsp;требованиями закона
+        №&nbsp;152-ФЗ и&nbsp;нормативами ФСТЭК и&nbsp;Роскомнадзора
+      </p>
+    </div>
+
+    <div class="main-complience">
+      <h3>
+        Комплаенс персональных
+        данных: анализ процессов
+        и&nbsp;документов по&nbsp;152-ФЗ
+      </h3>
+      <Button
+        to="#"
+        class="main-button"
+      >
+        Оставить заявку
+      </Button>
+    </div>
+
+    <div class="main-cards">
+      <MainCard
+        v-for="(card, i) in cards"
+        :key="i"
+        :icon="card.icon"
+        :text="card.text"
+      />
+    </div>
   </div>
 </template>
 
 <script setup>
-
+import { cards } from '@/content/main'
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .main {
-//   position: relative;
-//   height: 100vh;
-//   max-height: 100vh;
-//   max-width: 100vw;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   gap: rem(60);
-//   text-align: center;
-//   padding: 0 fluid(80, 20);
-//   overflow: hidden;
+  margin-top: rem(16);
+  background-color: var(--color-extra-light-blue);
+  border-radius: $border-radius-block;
+  padding: fluid(72, 48) fluid(42, 32);
+  display: grid;
+  gap: fluid(90, 60) fluid(40, 20);
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
 
-//   &::after {
-//     position: absolute;
-//     content: '';
-//     bottom: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 5px;
-//     background-color: $color-background;
-//   }
+  &-about {
+    max-width: rem(720);
+  }
 
-//   h1 {
-//     position: relative;
-//     z-index: 1;
-//   }
+  &-complience {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: rem(540);
+    background-color: $primary;
+    color: $color-background;
+    border-radius: $border-radius-card;
+    padding: fluid(40, 32);
+  }
 
-//   &-text {
-//     max-width: rem(400);
-//     position: relative;
-//     z-index: 1;
-//   }
-// }
+  &-cards {
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(rem(175), 1fr));
+    gap: rem(20);
+  }
 
-// .background {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100%;
-//   background-image: url(/public/images/bg_1.webp);
-//   background-position: center;
-//   background-size: cover;
-//   transform-origin: 50% 100%;
+  &-title {
+    margin-bottom: fluid(37, 32);
+  }
+
+  &-text {
+    max-width: rem(630);
+  }
+
+  &-button {
+    width: 100%;
+    margin-top: rem(32);
+  }
 }
 </style>

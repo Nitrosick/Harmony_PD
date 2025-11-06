@@ -18,12 +18,15 @@ $sm: 576px;
 $md: 768px;
 $lg: 1000px;
 $xl: 1200px;
-$xxl: 1440px;
+$xxl: 1360px;
 
+$primary: var(--color-dark-grey-blue);
 $color-text: var(--color-black);
 $color-background: var(--color-white);
-$font-main: 'Lato', 'Arial', sans-serif;
+$font-main: 'Open Sans', sans-serif;
 $transition-time: 0.3s;
+$border-radius-block: fluid(48, 32);
+$border-radius-card: fluid(28, 20);
 $content-width: $xxl;
 $min-width: $xs;
 

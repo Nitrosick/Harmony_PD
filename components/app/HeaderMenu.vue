@@ -1,48 +1,45 @@
 <template>
   <nav class="menu">
-    <!-- <NuxtLink
+    <NuxtLink
       v-for="item in menuItems"
       :key="item.id"
       :to="item.to"
-      class="menu-item"
+      class="menu-item caption"
       @click="emits('close')"
     >
-      {{ $t(`menu.${item.text}`) }}
+      {{ item.text }}
     </NuxtLink>
-    <Language @close="emits('close')" /> -->
   </nav>
 </template>
 
 <script setup>
-// const emits = defineEmits(['close'])
+const emits = defineEmits(['close'])
 
-// const menuItems = [
-//   { id: 1, to: '/#about', text: 'about' },
-//   { id: 2, to: '/#services', text: 'services' },
-//   { id: 3, to: '/#contacts', text: 'contacts' }
-// ]
+const menuItems = [
+  { id: 1, to: '/#services', text: 'Услуги' },
+  { id: 2, to: '/#support', text: 'Комплексное сопровождение' },
+  { id: 3, to: '/#contacts', text: 'Контакты' }
+]
 </script>
 
 <style lang="scss" scoped>
 .menu {
-  // display: flex;
-  // align-items: center;
+  display: flex;
+  align-items: center;
 
-  // &-item {
-  //   line-height: rem(45);
-  //   padding: 0 rem(20);
-  //   font-size: rem(16);
+  &-item {
+    padding: rem(12) rem(20);
+    color: $color-background;
+    transition: color $transition-time;
 
-  //   @include bp-md {
-  //     padding: 0;
-  //     font-size: rem(21);
-  //     font-weight: 500;
-  //   }
-  // }
+    &:hover {
+      color: var(--color-light-blue);
+    }
+  }
 
-  // @include bp-md {
-  //   align-items: flex-start;
-  //   flex-direction: column;
-  // }
+  @include bp-md {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 </style>
