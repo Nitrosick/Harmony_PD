@@ -8,20 +8,19 @@
       class="header-menu-switcher"
       @click.prevent="menuOpened = !menuOpened"
     >
-      Icon
-      <!-- <Icon
+      <Icon
         :name="menuOpened ? 'close' : 'burger'"
         size="l"
-      /> -->
+      />
     </button>
   </header>
 
-  <!-- <nav
-    class="header-dropdown-menu"
-    :class="{ 'header-dropdown-menu-opened': menuOpened }"
+  <Dropdown
+    :opened="menuOpened"
+    @close="menuOpened = false"
   >
     <HeaderMenu @close="menuOpened = false" />
-  </nav> -->
+  </Dropdown>
 </template>
 
 <script setup>
@@ -43,14 +42,6 @@ watch(menuOpened, (value) => {
   padding: fluid(28, 20) fluid(40, 32);
   border-radius: fluid(40, 32);
 
-  // position: absolute;
-  // top: 0;
-  // left: 0;
-  // width: 100%;
-  // background-color: $color-header-background;
-  // backdrop-filter: blur(3px);
-  // z-index: 3;
-
   &-menu {
     @include bp-md {
       display: none;
@@ -68,29 +59,5 @@ watch(menuOpened, (value) => {
       justify-content: center;
     }
   }
-
-  // &-dropdown-menu {
-  //   display: none;
-  //   position: fixed;
-  //   top: 0;
-  //   left: 0;
-  //   width: 100%;
-  //   height: 100%;
-  //   backdrop-filter: blur(30px);
-  //   padding: rem(110) fluid(80, 20) rem(40) fluid(80, 20);
-  //   z-index: 2;
-  //   transition: opacity $transition-time;
-  //   opacity: 0;
-  //   pointer-events: none;
-
-  //   @include bp-md {
-  //     display: block;
-  //   }
-  // }
-
-  // &-dropdown-menu-opened {
-  //   opacity: 1;
-  //   pointer-events: all;
-  // }
 }
 </style>

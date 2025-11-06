@@ -14,7 +14,7 @@
 </script>
 
 <style lang="scss" scoped>
-.loader {
+// .loader {
 //   position: fixed;
 //   top: 0;
 //   right: 0;
@@ -48,5 +48,5 @@
 //   0% { background-position: 0% 0%; }
 //   50% { background-position: 100% 0%; }
 //   100% { background-position: 0% 0%; }
-}
+// }
 </style>

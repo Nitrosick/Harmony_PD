@@ -1,6 +1,6 @@
 <template>
   <footer class="footer content">
-    <Logo />
+    <Logo class="footer-logo" />
     <section class="footer-block">
       <span>ООО&nbsp;«Harmony&nbsp;Technologies»</span>
       <span>ИНН {{ data.inn }}</span>
@@ -10,11 +10,11 @@
 
     <section class="footer-block">
       <NuxtLink to="#">О&nbsp;компании</NuxtLink>
-      <NuxtLink to="#">Услуги</NuxtLink>
-      <NuxtLink to="#">Комплексное сопровождение</NuxtLink>
+      <NuxtLink to="/#services">Услуги</NuxtLink>
+      <NuxtLink to="/#maintenance">Комплексное сопровождение</NuxtLink>
     </section>
 
-    <section class="footer-block">
+    <section class="footer-block footer-policy">
       <NuxtLink to="#">Политика обработки персональных данных</NuxtLink>
       <NuxtLink to="#">Согласие на&nbsp;обработку персональных данных</NuxtLink>
       <NuxtLink to="#">Стандарт обращения с&nbsp;персональными данными</NuxtLink>
@@ -28,7 +28,7 @@ import data from '@/content/footer'
 const phoneHref = computed(() => data.phone.replaceAll(' ', ''))
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .footer {
   margin-top: fluid(100, 75);
   display: grid;
@@ -37,6 +37,14 @@ const phoneHref = computed(() => data.phone.replaceAll(' ', ''))
   background-color: $primary;
   padding: fluid(72, 48) fluid(40, 32);
   border-radius: fluid(40, 32);
+
+  @include bp-lg {
+    grid-template-columns: repeat(3, auto);
+  }
+
+  @include bp-sm {
+    grid-template-columns: 1fr;
+  }
 
   &-block {
     display: flex;
@@ -48,6 +56,18 @@ const phoneHref = computed(() => data.phone.replaceAll(' ', ''))
 
     a {
       color: $color-background;
+    }
+  }
+
+  &-logo {
+    @include bp-lg {
+      grid-column: 1/-1;
+    }
+  }
+
+  &-policy {
+    @include bp-md {
+      grid-column: 1/-1;
     }
   }
 }

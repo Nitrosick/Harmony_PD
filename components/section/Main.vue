@@ -21,7 +21,7 @@
         и&nbsp;документов по&nbsp;152-ФЗ
       </h3>
       <Button
-        to="#"
+        to="/#maintenance"
         class="main-button"
       >
         Оставить заявку
@@ -54,6 +54,12 @@ import { cards } from '@/content/main'
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
 
+  @include bp-lg {
+    display: flex;
+    flex-direction: column;
+    gap: fluid(60, 48);
+  }
+
   &-about {
     max-width: rem(720);
   }
@@ -67,13 +73,21 @@ import { cards } from '@/content/main'
     color: $color-background;
     border-radius: $border-radius-card;
     padding: fluid(40, 32);
+
+    @include bp-lg {
+      align-self: center;
+    }
   }
 
   &-cards {
     grid-column: 1/-1;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(rem(175), 1fr));
-    gap: rem(20);
+    grid-template-columns: repeat(auto-fit, minmax(rem(160), 1fr));
+    gap: fluid(20, 16);
+
+    @include bp-lg {
+      grid-template-columns: repeat(auto-fit, minmax(rem(230), 1fr));
+    }
   }
 
   &-title {

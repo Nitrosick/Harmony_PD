@@ -33,7 +33,7 @@
 </script>
 
 <style lang="scss" scoped>
-.back-button {
+// .back-button {
 //   position: fixed;
 //   bottom: calc(20% + 0.3rem);
 //   right: calc(10% + 0.3rem);
@@ -85,5 +85,5 @@
 
 // .hidden {
 //   opacity: 0;
-}
+// }
 </style>

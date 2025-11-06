@@ -1,8 +1,9 @@
 <template>
   <div>
     <Main />
-    <Sphere />
-    <Services />
-    <Maintenance />
+    <Sphere id="sphere" />
+    <Services id="services" />
+    <Maintenance id="maintenance" />
+    <Questions id="questions" />
   </div>
 </template>

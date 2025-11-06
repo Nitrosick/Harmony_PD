@@ -17,8 +17,8 @@ const emits = defineEmits(['close'])
 
 const menuItems = [
   { id: 1, to: '/#services', text: 'Услуги' },
-  { id: 2, to: '/#support', text: 'Комплексное сопровождение' },
-  { id: 3, to: '/#contacts', text: 'Контакты' }
+  { id: 2, to: '/#maintenance', text: 'Комплексное сопровождение' },
+  { id: 3, to: '/#questions', text: 'Контакты' }
 ]
 </script>
 
@@ -31,6 +31,11 @@ const menuItems = [
     padding: rem(12) rem(20);
     color: $color-background;
     transition: color $transition-time;
+
+    @include bp-md {
+      color: $color-text;
+      font-size: rem(18);
+    }
 
     &:hover {
       color: var(--color-light-blue);
