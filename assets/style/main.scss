@@ -54,12 +54,12 @@ h1 {
 }
 
 h2 {
-  font-size: fluid(36, 28);
+  font-size: fluid(38, 30);
   font-weight: 500;
 }
 
 h3 {
-  font-size: fluid(34, 26);
+  font-size: fluid(32, 26);
   font-weight: 500;
 }
 
@@ -85,6 +85,14 @@ button {
   background-color: transparent;
   padding: 0;
   cursor: pointer;
+}
+
+ol, ul {
+  margin: 0;
+  padding-left: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: rem(12);
 }
 
 .plug {

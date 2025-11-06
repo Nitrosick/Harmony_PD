@@ -78,7 +78,7 @@ onBeforeUnmount(() => {
     margin-top: rem(28);
     display: flex;
     align-items: center;
-    gap: fluid(54, 32);
+    gap: fluid(54, 0);
   }
 
   &-slider {
