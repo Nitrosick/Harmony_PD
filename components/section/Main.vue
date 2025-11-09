@@ -28,7 +28,10 @@
       </Button>
     </div>
 
-    <div class="main-cards">
+    <div
+      v-if="data"
+      class="main-cards"
+    >
       <MainCard
         v-for="(card, i) in cards"
         :key="i"
@@ -40,7 +43,9 @@
 </template>
 
 <script setup>
-import { cards } from '@/content/main'
+// import { cards } from '@/content/main'
+const { data } = await useFetch('https://harmonytec.ru/content/main.json')
+const cards = computed(() => data?.cards || [])
 </script>
 
 <style lang="scss">

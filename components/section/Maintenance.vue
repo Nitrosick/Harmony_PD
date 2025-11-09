@@ -2,7 +2,10 @@
   <div class="maintenance content">
     <h2>Уровни комплексного сопровождения</h2>
 
-    <div class="maintenance-list">
+    <div
+      v-if="data"
+      class="maintenance-list"
+    >
       <MaintenanceCard
         v-for="(card, i) in cards"
         :key="i"
@@ -15,7 +18,9 @@
 </template>
 
 <script setup>
-import { cards } from '@/content/maintenance'
+// import { cards } from '@/content/maintenance'
+const { data } = await useFetch('https://harmonytec.ru/content/maintenance.json')
+const cards = computed(() => data?.cards || [])
 </script>
 
 <style lang="scss" scoped>

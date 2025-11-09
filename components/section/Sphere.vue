@@ -10,6 +10,7 @@
       />
       <div class="sphere-slider">
         <div
+          v-if="data"
           ref="slider"
           class="sphere-slider-items"
         >
@@ -39,7 +40,9 @@
 </template>
 
 <script setup>
-import { cards } from '@/content/sphere'
+// import { cards } from '@/content/sphere'
+const { data } = await useFetch('https://harmonytec.ru/content/sphere.json')
+const cards = computed(() => data?.cards || [])
 
 const slider = ref(null)
 

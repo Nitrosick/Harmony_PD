@@ -1,5 +1,8 @@
 <template>
-  <div class="services content">
+  <div
+    v-if="data"
+    class="services content"
+  >
     <h2>Услуги Harmony Technologies</h2>
     <p  class="services-subtitle">
       Комплексная помощь в&nbsp;обеспечении законной и&nbsp;безопасной обработки персональных данных
@@ -58,7 +61,9 @@
 </template>
 
 <script setup>
-import { cards } from '@/content/services'
+// import { cards } from '@/content/services'
+const { data } = await useFetch('https://harmonytec.ru/content/services.json')
+const cards = computed(() => data?.cards || [])
 </script>
 
 <style lang="scss" scoped>

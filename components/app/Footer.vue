@@ -1,7 +1,10 @@
 <template>
   <footer class="footer content">
     <Logo class="footer-logo" />
-    <section class="footer-block">
+    <section
+      v-if="data"
+      class="footer-block"
+    >
       <span>ООО&nbsp;«Harmony&nbsp;Technologies»</span>
       <span>ИНН {{ data.inn }}</span>
       <span>Юридический адрес {{ data.address }}</span>
@@ -23,9 +26,13 @@
 </template>
 
 <script setup>
-import data from '@/content/footer'
+// import data from '@/content/footer'
+const { data } = await useFetch('https://harmonytec.ru/content/footer.json')
 
-const phoneHref = computed(() => data.phone.replaceAll(' ', ''))
+const phoneHref = computed(() => {
+  if (data) return data.phone.replaceAll(' ', '')
+  return ''
+})
 </script>
 
 <style lang="scss">
