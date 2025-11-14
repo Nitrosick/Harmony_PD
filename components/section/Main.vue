@@ -1,3 +1,10 @@
+<script setup lang="js">
+const { main } = useSiteContent()
+
+// карточки для нижнего блока (иконки + текст)
+const cards = computed(() => main?.cards || [])
+</script>
+
 <template>
   <div class="main content">
     <div class="main-about">
@@ -29,7 +36,7 @@
     </div>
 
     <div
-      v-if="data"
+      v-if="cards.length"
       class="main-cards"
     >
       <MainCard
@@ -41,12 +48,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-// import { cards } from '@/content/main'
-const { data } = await useFetch('https://harmonytec.ru/content/main.json')
-const cards = computed(() => data?.cards || [])
-</script>
 
 <style lang="scss">
 .main {
