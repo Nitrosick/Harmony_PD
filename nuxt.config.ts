@@ -3,7 +3,16 @@ const title = 'Harmony Technologies PD'
 export default defineNuxtConfig({
   compatibilityDate: '2025-11-05',
   devtools: { enabled: true },
+
+  //добавляем клиентский режим и статическую генерацию
+  ssr: false,
+
+  nitro: {
+    preset: 'static'
+  },
+
   app: {
+    baseURL: '/', // сайт в корне домена
     head: {
       charset: 'utf-8',
       title: title,
@@ -14,6 +23,7 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: 'fade', mode: 'out-in' }
   },
+
   components: {
     dirs: [
       'components/ui',
@@ -21,6 +31,7 @@ export default defineNuxtConfig({
       'components/section'
     ]
   },
+
   vite: {
     css: {
       preprocessorOptions: {
@@ -28,22 +39,26 @@ export default defineNuxtConfig({
           api: 'modern',
           silenceDeprecations: ['import'],
           additionalData: '@import "@/assets/style/variables.scss";'
-        },
-      },
-    },
+        }
+      }
+    }
   },
+
   css: [
     '@/assets/style/normalize.scss',
     '@/assets/style/main.scss'
   ],
+
   imports: {
     dirs: ['store']
   },
+
   modules: [
     // '@nuxtjs/i18n',
     'motion-v/nuxt',
     // 'nuxt-gtag'
   ],
+
   // i18n: {
   //   defaultLocale: 'ja',
   //   detectBrowserLanguage: false,
@@ -57,6 +72,7 @@ export default defineNuxtConfig({
   //     typedOptionsAndMessages: 'default',
   //   }
   // },
+
   // gtag: {
   //   id: 'G-0QJHDP20Y3',
   //   enabled: process.env.NODE_ENV === 'production',

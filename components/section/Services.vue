@@ -1,10 +1,10 @@
 <template>
   <div
-    v-if="data"
+    v-if="services"
     class="services content"
   >
     <h2>Услуги Harmony Technologies</h2>
-    <p  class="services-subtitle">
+    <p class="services-subtitle">
       Комплексная помощь в&nbsp;обеспечении законной и&nbsp;безопасной обработки персональных данных
     </p>
 
@@ -37,7 +37,10 @@
         />
       </div>
 
-      <div class="services-row">
+      <div
+        v-if="cards.outsourcing.length"
+        class="services-row"
+      >
         <h3>Аутсорсинг ответственного (DPO)</h3>
         <ServicesCard
           v-for="(card, i) in cards.outsourcing"
@@ -61,9 +64,16 @@
 </template>
 
 <script setup>
-// import { cards } from '@/content/services'
-const { data } = await useFetch('https://harmonytec.ru/content/services.json')
-const cards = computed(() => data?.cards || [])
+const { services } = useSiteContent()
+
+const cards = computed(() => {
+  const c = services?.cards || {}
+  return {
+    technical: c.technical || [],
+    legal: c.legal || [],
+    outsourcing: c.outsourcing || []
+  }
+})
 </script>
 
 <style lang="scss" scoped>
