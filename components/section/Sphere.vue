@@ -1,3 +1,36 @@
+<script setup lang="js">
+const { sphere } = useSiteContent()
+
+const cards = computed(() => sphere?.cards || [])
+
+const slider = ref(null)
+
+const scrollLeft = () => {
+  if (slider.value) {
+    slider.value.scrollBy({ left: -slider.value.clientWidth, behavior: 'smooth' })
+  }
+}
+
+const scrollRight = () => {
+  if (slider.value) {
+    slider.value.scrollBy({ left: slider.value.clientWidth, behavior: 'smooth' })
+  }
+}
+
+const resetScroll = () => {
+  if (slider.value) {
+    slider.value.scrollTo({ left: 0, behavior: 'smooth' })
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('resize', resetScroll)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', resetScroll)
+})
+</script>
 <template>
   <div class="sphere content">
     <h2>Типовые зоны риска при&nbsp;обработке персональных данных</h2>
@@ -9,11 +42,11 @@
         @click="scrollLeft"
       />
       <div class="sphere-slider">
-        <div
-          v-if="data"
-          ref="slider"
-          class="sphere-slider-items"
-        >
+	<div
+	  v-if="cards.length"
+	  ref="slider"
+	  class="sphere-slider-items"
+	>
           <SphereCard
             v-for="(card, i) in cards"
             :key="i"
@@ -39,33 +72,6 @@
   </div>
 </template>
 
-<script setup>
-// import { cards } from '@/content/sphere'
-const { data } = await useFetch('https://harmonytec.ru/content/sphere.json')
-const cards = computed(() => data?.cards || [])
-
-const slider = ref(null)
-
-const scrollLeft = () => {
-  slider.value.scrollBy({ left: -slider.value.clientWidth, behavior: 'smooth' })
-}
-
-const scrollRight = () => {
-  slider.value.scrollBy({ left: slider.value.clientWidth, behavior: 'smooth' })
-}
-
-const resetScroll = () => {
-  if (slider.value) slider.value.scrollTo({ left: 0, behavior: 'smooth' })
-}
-
-onMounted(() => {
-  window.addEventListener('resize', resetScroll)
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('resize', resetScroll)
-})
-</script>
 
 <style lang="scss">
 .sphere {
