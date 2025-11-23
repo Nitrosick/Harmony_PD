@@ -1,9 +1,15 @@
+<script setup lang="js">
+const { maintenance } = useSiteContent()
+
+const cards = computed(() => maintenance?.cards || [])
+</script>
+
 <template>
   <div class="maintenance content">
     <h2>Уровни комплексного сопровождения</h2>
 
     <div
-      v-if="data"
+      v-if="cards.length"
       class="maintenance-list"
     >
       <MaintenanceCard
@@ -16,12 +22,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-// import { cards } from '@/content/maintenance'
-const { data } = await useFetch('https://harmonytec.ru/content/maintenance.json')
-const cards = computed(() => data?.cards || [])
-</script>
 
 <style lang="scss" scoped>
 .maintenance {

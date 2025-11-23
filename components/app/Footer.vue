@@ -1,14 +1,15 @@
 <template>
   <footer class="footer content">
     <Logo class="footer-logo" />
+
     <section
-      v-if="data"
+      v-if="footer"
       class="footer-block"
     >
       <span>ООО&nbsp;«Harmony&nbsp;Technologies»</span>
-      <span>ИНН {{ data.inn }}</span>
-      <span>Юридический адрес {{ data.address }}</span>
-      <a :href="`tel:${phoneHref}`">{{ data.phone }}</a>
+      <span>ИНН {{ footer.inn }}</span>
+      <span>Юридический адрес {{ footer.address }}</span>
+      <a :href="`tel:${phoneHref}`">{{ footer.phone }}</a>
     </section>
 
     <section class="footer-block">
@@ -25,16 +26,16 @@
   </footer>
 </template>
 
-<script setup>
-// import data from '@/content/footer'
-const { data } = await useFetch('https://harmonytec.ru/content/footer.json')
+<script setup lang="js">
+const { footer } = useSiteContent()
 
 const phoneHref = computed(() => {
-  if (data) return data.phone.replaceAll(' ', '')
+  if (footer && footer.phone) {
+    return footer.phone.replaceAll(' ', '')
+  }
   return ''
 })
 </script>
-
 <style lang="scss">
 .footer {
   margin-top: fluid(100, 75);
