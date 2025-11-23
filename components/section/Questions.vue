@@ -1,7 +1,4 @@
 <script setup lang="js">
-import { ref } from 'vue'
-import ContactModal from '~/components/ContactModal.vue'
-
 const isContactOpen = ref(false)
 
 const openModal = () => {
