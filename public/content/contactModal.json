@@ -1,0 +1,35 @@
+{
+  "title": "Оставить заявку",
+  "closeAriaLabel": "Закрыть",
+  "fields": {
+    "organization": {
+      "placeholder": "Организация"
+    },
+    "contact_person": {
+      "placeholder": "Контактное лицо"
+    },
+    "phone": {
+      "placeholder": "Телефон"
+    },
+    "email": {
+      "placeholder": "Email"
+    },
+    "request": {
+      "placeholder": "Ваш запрос",
+      "hint": "Укажите, какой процесс работы с ПДн требует сопровождения"
+    }
+  },
+  "consent": {
+    "prefix": "Даю",
+    "consentText": "Согласие на обработку персональных данных",
+    "and": "и подтверждаю ознакомление с",
+    "policyText": "Политикой обработки персональных данных"
+  },
+  "messages": {
+    "success": "Спасибо! Ваша заявка отправлена.",
+    "errorDefault": "Ошибка при отправке.",
+    "errorNetwork": "Ошибка сети при отправке формы.",
+    "submit": "Отправить",
+    "submitting": "Отправка…"
+  }
+}

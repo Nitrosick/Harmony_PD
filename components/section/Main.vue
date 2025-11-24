@@ -2,36 +2,34 @@
 const { main } = useSiteContent()
 
 // карточки для нижнего блока (иконки + текст)
-const cards = computed(() => main?.cards || [])
+const cards = computed(() => main.value?.cards || [])
 </script>
 
 <template>
   <div class="main content">
     <div class="main-about">
-      <h1 class="main-title">
-        Персональные данные ваших
-        клиентов, сотрудников
-        и&nbsp;посетителей&nbsp;— под&nbsp;защитой
-      </h1>
-      <p class="main-text">
-        Harmony Technologies обеспечивает правовую,
-        организационную и&nbsp;техническую защиту персональных
-        данных компаний в&nbsp;соответствии с&nbsp;требованиями закона
-        №&nbsp;152-ФЗ и&nbsp;нормативами ФСТЭК и&nbsp;Роскомнадзора
-      </p>
+      <h1
+        v-if="main?.hero?.title"
+        class="main-title"
+        v-html="main.hero.title"
+      />
+      <p
+        v-if="main?.hero?.text"
+        class="main-text"
+        v-html="main.hero.text"
+      />
     </div>
 
-    <div class="main-complience">
-      <h3>
-        Комплаенс персональных
-        данных: анализ процессов
-        и&nbsp;документов по&nbsp;152-ФЗ
-      </h3>
+    <div
+      v-if="main?.compliance"
+      class="main-complience"
+    >
+      <h3 v-html="main.compliance.title" />
       <Button
-        to="/#maintenance"
+        :to="main.compliance.buttonLink"
         class="main-button"
       >
-        Оставить заявку
+        {{ main.compliance.button }}
       </Button>
     </div>
 
@@ -48,6 +46,7 @@ const cards = computed(() => main?.cards || [])
     </div>
   </div>
 </template>
+
 
 <style lang="scss">
 .main {

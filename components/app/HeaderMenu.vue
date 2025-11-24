@@ -1,3 +1,11 @@
+<script setup>
+const emits = defineEmits(['close'])
+
+const { header } = useSiteContent()
+
+const menuItems = computed(() => header.value?.menu || [])
+</script>
+
 <template>
   <nav class="menu">
     <NuxtLink
@@ -7,20 +15,12 @@
       class="menu-item caption"
       @click="emits('close')"
     >
-      {{ item.text }}
+      <span v-html="item.text" />
     </NuxtLink>
   </nav>
 </template>
 
-<script setup>
-const emits = defineEmits(['close'])
 
-const menuItems = [
-  { id: 1, to: '/#services', text: 'Услуги' },
-  { id: 2, to: '/#maintenance', text: 'Комплексное сопровождение' },
-  { id: 3, to: '/#questions', text: 'Контакты' }
-]
-</script>
 
 <style lang="scss" scoped>
 .menu {

@@ -1,5 +1,7 @@
-<script setup lang="js">
+п»ї<script setup lang="js">
 import { ref, reactive, watch } from 'vue'
+
+const { contactModal } = useSiteContent()
 
 const props = defineProps({
   open: {
@@ -23,42 +25,36 @@ const loading = ref(false)
 const error = ref('')
 const success = ref(false)
 
-const close = () => {
-  emit('update:open', false)
-}
-
 watch(
   () => props.open,
   (val) => {
     if (!val) {
-      // сбрасываем сообщения при закрытии
       error.value = ''
       success.value = false
     }
   }
 )
 
-const submitForm = async () => {
-  error.value = ''
-  success.value = false
+const close = () => {
+  emit('update:open', false)
+}
 
-  if (
-    !state.organization ||
-    !state.contact_person ||
-    !state.phone ||
-    !state.email ||
-    !state.request
-  ) {
-    error.value = 'Пожалуйста, заполните все поля.'
+const submitForm = async () => {
+  const cfg = contactModal.value
+
+  if (!cfg || !cfg.messages) {
+    error.value = 'Р’РЅСѓС‚СЂРµРЅРЅСЏСЏ РѕС€РёР±РєР°: РєРѕРЅС„РёРіСѓСЂР°С†РёСЏ С„РѕСЂРјС‹ РЅРµ Р·Р°РіСЂСѓР¶РµРЅР°'
     return
   }
 
   if (!agree.value) {
-    error.value = 'Поставьте галочку согласия на обработку персональных данных.'
+    error.value = cfg.messages.errorDefault
     return
   }
 
   loading.value = true
+  error.value = ''
+  success.value = false
 
   try {
     const body = new URLSearchParams()
@@ -71,7 +67,9 @@ const submitForm = async () => {
 
     const res = await fetch('/contact.php', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+      },
       body: body.toString()
     })
 
@@ -79,7 +77,6 @@ const submitForm = async () => {
 
     if (text.startsWith('OK')) {
       success.value = true
-      // очистка полей
       state.organization = ''
       state.contact_person = ''
       state.phone = ''
@@ -87,10 +84,10 @@ const submitForm = async () => {
       state.request = ''
       agree.value = false
     } else {
-      error.value = text.replace(/^ERR:\s*/i, '') || 'Ошибка при отправке.'
+      error.value = text.replace(/^ERR:\s*/i, '') || cfg.messages.errorDefault
     }
   } catch (e) {
-    error.value = 'Ошибка сети при отправке формы.'
+    error.value = contactModal.value?.messages?.errorNetwork || 'РћС€РёР±РєР° СЃРµС‚Рё РїСЂРё РѕС‚РїСЂР°РІРєРµ С„РѕСЂРјС‹.'
   } finally {
     loading.value = false
   }
@@ -100,7 +97,7 @@ const submitForm = async () => {
 <template>
   <Teleport to="body">
     <div
-      v-if="open"
+      v-if="open && contactModal"
       class="contact-modal-backdrop"
       @click.self="close"
     >
@@ -109,13 +106,13 @@ const submitForm = async () => {
           class="contact-modal__close"
           type="button"
           @click="close"
-          aria-label="Закрыть"
+          :aria-label="contactModal.closeAriaLabel"
         >
-          ?
+          вњ•
         </button>
 
         <h2 class="contact-modal__title">
-          Оставить заявку
+          {{ contactModal.title }}
         </h2>
 
         <form
@@ -127,7 +124,7 @@ const submitForm = async () => {
               v-model="state.organization"
               type="text"
               name="organization"
-              placeholder="Организация"
+              :placeholder="contactModal.fields.organization.placeholder"
               required
             />
           </div>
@@ -137,7 +134,7 @@ const submitForm = async () => {
               v-model="state.contact_person"
               type="text"
               name="contact_person"
-              placeholder="Контактное лицо"
+              :placeholder="contactModal.fields.contact_person.placeholder"
               required
             />
           </div>
@@ -147,7 +144,7 @@ const submitForm = async () => {
               v-model="state.phone"
               type="tel"
               name="phone"
-              placeholder="Телефон"
+              :placeholder="contactModal.fields.phone.placeholder"
               required
             />
           </div>
@@ -157,7 +154,7 @@ const submitForm = async () => {
               v-model="state.email"
               type="email"
               name="email"
-              placeholder="Email"
+              :placeholder="contactModal.fields.email.placeholder"
               required
             />
           </div>
@@ -167,38 +164,43 @@ const submitForm = async () => {
               v-model="state.request"
               name="request"
               rows="3"
-              placeholder="Ваш запрос"
+              :placeholder="contactModal.fields.request.placeholder"
               required
             ></textarea>
           </div>
 
-          <p class="contact-modal__hint">
-            Укажите, какой процесс работы с ПДн требует сопровождения
+          <p
+            v-if="contactModal.fields?.request?.hint"
+            class="contact-modal__hint"
+          >
+            {{ contactModal.fields.request.hint }}
           </p>
 
-          <label class="contact-modal__checkbox">
+          <label
+            v-if="contactModal.consent"
+            class="contact-modal__checkbox"
+          >
             <input
               v-model="agree"
               type="checkbox"
               :value="1"
             />
             <span>
-              Даю
-              <!-- подставь свои реальные ссылки -->
+              {{ contactModal.consent.prefix }}
               <a
                 href="/docs/pdn-consent.pdf"
                 target="_blank"
                 rel="noopener"
               >
-                Согласие на обработку персональных данных
+                {{ contactModal.consent.consentText }}
               </a>
-              и подтверждаю ознакомление с
+              {{ contactModal.consent.and }}
               <a
                 href="/docs/privacy-policy.pdf"
                 target="_blank"
                 rel="noopener"
               >
-                Политикой обработки персональных данных
+                {{ contactModal.consent.policyText }}
               </a>
             </span>
           </label>
@@ -209,11 +211,12 @@ const submitForm = async () => {
           >
             {{ error }}
           </p>
+
           <p
             v-if="success"
             class="contact-modal__message contact-modal__message--success"
           >
-            Спасибо! Ваша заявка отправлена.
+            {{ contactModal.messages.success }}
           </p>
 
           <button
@@ -221,13 +224,20 @@ const submitForm = async () => {
             type="submit"
             :disabled="loading"
           >
-            {{ loading ? 'Отправка…' : 'Отправить' }}
+            {{
+              loading
+                ? contactModal.messages.submitting
+                : contactModal.messages.submit
+            }}
           </button>
         </form>
       </div>
     </div>
   </Teleport>
 </template>
+
+
+
 
 <style scoped lang="scss">
 .contact-modal-backdrop {

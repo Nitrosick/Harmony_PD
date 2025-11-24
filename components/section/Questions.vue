@@ -1,6 +1,8 @@
 <script setup lang="js">
 import { ref } from 'vue'
-import ContactModal from '~/components/ContactModal.vue'
+import ContactModal from '~/components/section/ContactModal.vue'
+
+const { questions } = useSiteContent()
 
 const isContactOpen = ref(false)
 
@@ -10,20 +12,26 @@ const openModal = () => {
 </script>
 
 <template>
-  <div class="questions">
-    <h2>Остались вопросы?</h2>
+  <div
+    v-if="questions"
+    class="questions"
+  >
+    <h2 v-html="questions.title" />
+
     <Button
+      v-if="questions.button"
       to="#"
       class="questions-button"
       theme="dark"
       @click.prevent="openModal"
     >
-      Свяжитесь с нами
+      {{ questions.button.label }}
     </Button>
 
     <ContactModal v-model:open="isContactOpen" />
   </div>
 </template>
+
 
 <style lang="scss">
 .questions {

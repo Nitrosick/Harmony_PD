@@ -1,0 +1,42 @@
+{
+  "companyName": "ООО&nbsp;«Harmony&nbsp;Technologies»",
+  "innLabel": "ИНН",
+  "addressLabel": "Юридический адрес",
+  "inn": "",
+  "address": "",
+  "phone": "+7 111 111 222",
+  "menu": [
+    {
+      "id": "about",
+      "to": "#",
+      "text": "О&nbsp;компании"
+    },
+    {
+      "id": "services",
+      "to": "/#services",
+      "text": "Услуги"
+    },
+    {
+      "id": "maintenance",
+      "to": "/#maintenance",
+      "text": "Комплексное сопровождение"
+    }
+  ],
+  "policyLinks": [
+    {
+      "id": "policy",
+      "to": "#",
+      "text": "Политика обработки персональных данных"
+    },
+    {
+      "id": "consent",
+      "to": "#",
+      "text": "Согласие на&nbsp;обработку персональных данных"
+    },
+    {
+      "id": "standard",
+      "to": "#",
+      "text": "Стандарт обращения с&nbsp;персональными данными"
+    }
+  ]
+}
