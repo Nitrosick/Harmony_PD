@@ -1,12 +1,12 @@
 <script setup lang="js">
 const { maintenance } = useSiteContent()
 
-const cards = computed(() => maintenance?.cards || [])
+const cards = computed(() => maintenance.value?.cards || [])
 </script>
 
 <template>
   <div class="maintenance content">
-    <h2>Уровни комплексного сопровождения</h2>
+    <h2 v-html="maintenance.title" />
 
     <div
       v-if="cards.length"
@@ -22,6 +22,7 @@ const cards = computed(() => maintenance?.cards || [])
     </div>
   </div>
 </template>
+
 
 <style lang="scss" scoped>
 .maintenance {

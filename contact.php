@@ -1,4 +1,4 @@
-<?php
+п»ї<?php
 // contact.php
 mb_internal_encoding("UTF-8");
 
@@ -14,39 +14,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $agree      = isset($_POST['agree']) ? $_POST['agree'] : null;
 
     if ($org === '' || $contact === '' || $phone === '' || $email === '' || $request === '') {
-        $error = 'Пожалуйста, заполните все поля.';
+        $error = 'РџРѕР¶Р°Р»СѓР№СЃС‚Р°, Р·Р°РїРѕР»РЅРёС‚Рµ РІСЃРµ РїРѕР»СЏ.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = 'Некорректный адрес электронной почты.';
+        $error = 'РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ Р°РґСЂРµСЃ СЌР»РµРєС‚СЂРѕРЅРЅРѕР№ РїРѕС‡С‚С‹.';
     } elseif ($agree !== '1') {
-        $error = 'Не отмечено согласие на обработку персональных данных.';
+        $error = 'РќРµ РѕС‚РјРµС‡РµРЅРѕ СЃРѕРіР»Р°СЃРёРµ РЅР° РѕР±СЂР°Р±РѕС‚РєСѓ РїРµСЂСЃРѕРЅР°Р»СЊРЅС‹С… РґР°РЅРЅС‹С….';
     } else {
         $to   = 'contact@harmonytec.ru';
         $from = 'contact@harmonytec.ru';
 
-        $subject = 'Новая заявка с сайта harmonytec.ru';
+        $subject = 'РќРѕРІР°СЏ Р·Р°СЏРІРєР° СЃ СЃР°Р№С‚Р° harmonytec.ru';
         $body    =
-            "Организация: {$org}\n" .
-            "Контактное лицо: {$contact}\n" .
-            "Телефон: {$phone}\n" .
+            "РћСЂРіР°РЅРёР·Р°С†РёСЏ: {$org}\n" .
+            "РљРѕРЅС‚Р°РєС‚РЅРѕРµ Р»РёС†Рѕ: {$contact}\n" .
+            "РўРµР»РµС„РѕРЅ: {$phone}\n" .
             "Email: {$email}\n\n" .
-            "Запрос:\n{$request}\n";
+            "Р—Р°РїСЂРѕСЃ:\n{$request}\n";
 
         $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
 
-        $headers  = "From: Harmonytec сайт <{$from}>\r\n";
+        $headers  = "From: Harmonytec СЃР°Р№С‚ <{$from}>\r\n";
         $headers .= "Reply-To: {$email}\r\n";
         $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
         if (mail($to, $encodedSubject, $body, $headers)) {
             $sent = true;
         } else {
-            $error = 'Не удалось отправить письмо (mail() вернул false).';
+            $error = 'РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РїСЂР°РІРёС‚СЊ РїРёСЃСЊРјРѕ (mail() РІРµСЂРЅСѓР» false).';
         }
     }
 }
 
-header('Content-Type: text/plain; charset=UTF-8');
-
+// РќРРљРђРљРРҐ header() вЂ” РїСЂРѕСЃС‚Рѕ С‚РµРєСЃС‚РѕРІС‹Р№ РѕС‚РІРµС‚
 if ($sent) {
     echo "OK";
 } else {

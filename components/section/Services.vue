@@ -1,19 +1,34 @@
+<script setup>
+const { services } = useSiteContent()
+
+const cards = computed(() => {
+  const c = services.value?.cards || {}
+  return {
+    technical: c.technical || [],
+    legal: c.legal || [],
+    outsourcing: c.outsourcing || []
+  }
+})
+</script>
+
 <template>
   <div
     v-if="services"
     class="services content"
   >
-    <h2>Услуги Harmony Technologies</h2>
-    <p class="services-subtitle">
-      Комплексная помощь в&nbsp;обеспечении законной и&nbsp;безопасной обработки персональных данных
-    </p>
+    <h2 v-html="services.title" />
+    <p
+      v-if="services.subtitle"
+      class="services-subtitle"
+      v-html="services.subtitle"
+    />
 
     <div class="services-content">
       <div
         v-if="cards.technical.length"
         class="services-row"
       >
-        <h3>Технические услуги</h3>
+        <h3 v-html="services.sections?.technical?.title" />
         <ServicesCard
           v-for="(card, i) in cards.technical"
           :key="i"
@@ -27,7 +42,7 @@
         v-if="cards.legal.length"
         class="services-row"
       >
-        <h3>Правовые услуги</h3>
+        <h3 v-html="services.sections?.legal?.title" />
         <ServicesCard
           v-for="(card, i) in cards.legal"
           :key="i"
@@ -41,7 +56,7 @@
         v-if="cards.outsourcing.length"
         class="services-row"
       >
-        <h3>Аутсорсинг ответственного (DPO)</h3>
+        <h3 v-html="services.sections?.outsourcing?.title" />
         <ServicesCard
           v-for="(card, i) in cards.outsourcing"
           :key="i"
@@ -63,18 +78,6 @@
   </div>
 </template>
 
-<script setup>
-const { services } = useSiteContent()
-
-const cards = computed(() => {
-  const c = services?.cards || {}
-  return {
-    technical: c.technical || [],
-    legal: c.legal || [],
-    outsourcing: c.outsourcing || []
-  }
-})
-</script>
 
 <style lang="scss" scoped>
 .services {

@@ -1,3 +1,15 @@
+<script setup lang="js">
+const { footer } = useSiteContent()
+
+const phoneHref = computed(() => {
+  const f = footer.value
+  if (f && f.phone) {
+    return f.phone.replaceAll(' ', '')
+  }
+  return ''
+})
+</script>
+
 <template>
   <footer class="footer content">
     <Logo class="footer-logo" />
@@ -6,36 +18,48 @@
       v-if="footer"
       class="footer-block"
     >
-      <span>ООО&nbsp;«Harmony&nbsp;Technologies»</span>
-      <span>ИНН {{ footer.inn }}</span>
-      <span>Юридический адрес {{ footer.address }}</span>
-      <a :href="`tel:${phoneHref}`">{{ footer.phone }}</a>
+      <span v-html="footer.companyName" />
+      <span>
+        {{ footer.innLabel }}
+        {{ footer.inn }}
+      </span>
+      <span>
+        {{ footer.addressLabel }}
+        {{ footer.address }}
+      </span>
+      <a :href="`tel:${phoneHref}`">
+        {{ footer.phone }}
+      </a>
     </section>
 
-    <section class="footer-block">
-      <NuxtLink to="#">О&nbsp;компании</NuxtLink>
-      <NuxtLink to="/#services">Услуги</NuxtLink>
-      <NuxtLink to="/#maintenance">Комплексное сопровождение</NuxtLink>
+    <section
+      v-if="footer.menu?.length"
+      class="footer-block"
+    >
+      <NuxtLink
+        v-for="link in footer.menu"
+        :key="link.id"
+        :to="link.to"
+        v-html="link.text"
+      />
     </section>
 
-    <section class="footer-block footer-policy">
-      <NuxtLink to="#">Политика обработки персональных данных</NuxtLink>
-      <NuxtLink to="#">Согласие на&nbsp;обработку персональных данных</NuxtLink>
-      <NuxtLink to="#">Стандарт обращения с&nbsp;персональными данными</NuxtLink>
+    <section
+      v-if="footer.policyLinks?.length"
+      class="footer-block footer-policy"
+    >
+      <NuxtLink
+        v-for="link in footer.policyLinks"
+        :key="link.id"
+        :to="link.to"
+        v-html="link.text"
+      />
     </section>
   </footer>
 </template>
 
-<script setup lang="js">
-const { footer } = useSiteContent()
 
-const phoneHref = computed(() => {
-  if (footer && footer.phone) {
-    return footer.phone.replaceAll(' ', '')
-  }
-  return ''
-})
-</script>
+
 <style lang="scss">
 .footer {
   margin-top: fluid(100, 75);

@@ -1,7 +1,7 @@
 <script setup lang="js">
 const { sphere } = useSiteContent()
 
-const cards = computed(() => sphere?.cards || [])
+const cards = computed(() => sphere.value?.cards || [])
 
 const slider = ref(null)
 
@@ -31,10 +31,11 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', resetScroll)
 })
 </script>
+
 <template>
   <div class="sphere content">
-    <h2>Типовые зоны риска при&nbsp;обработке персональных данных</h2>
-    <p>Основные области, где&nbsp;компании сталкиваются с&nbsp;нарушениями 152-ФЗ</p>
+    <h2 v-html="sphere.title" />
+    <p v-html="sphere.subtitle" />
 
     <div class="sphere-slider-container">
       <SliderButton
@@ -42,11 +43,11 @@ onBeforeUnmount(() => {
         @click="scrollLeft"
       />
       <div class="sphere-slider">
-	<div
-	  v-if="cards.length"
-	  ref="slider"
-	  class="sphere-slider-items"
-	>
+        <div
+          v-if="cards.length"
+          ref="slider"
+          class="sphere-slider-items"
+        >
           <SphereCard
             v-for="(card, i) in cards"
             :key="i"
@@ -63,11 +64,12 @@ onBeforeUnmount(() => {
     </div>
 
     <Button
-      to="#"
+      v-if="sphere.button"
       class="sphere-button"
       theme="dark"
+      :to="sphere.button.to"
     >
-      Проверить процесс обработки ПДн
+      {{ sphere.button.label }}
     </Button>
   </div>
 </template>

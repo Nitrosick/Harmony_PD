@@ -1,4 +1,17 @@
 {
+  "title": "Услуги Harmony Technologies",
+  "subtitle": "Комплексная помощь в&nbsp;обеспечении законной и&nbsp;безопасной обработки персональных данных",
+  "sections": {
+    "technical": {
+      "title": "Технические услуги"
+    },
+    "legal": {
+      "title": "Правовые услуги"
+    },
+    "outsourcing": {
+      "title": "Аутсорсинг ответственного (DPO)"
+    }
+  },
   "cards": {
     "technical": [
       {
