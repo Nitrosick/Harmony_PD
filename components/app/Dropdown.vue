@@ -3,6 +3,9 @@
     class="dropdown"
     :class="{ 'dropdown-opened': opened }"
   >
+    <div class="dropdown-bg"
+      @click.stop="emits('close')"
+    />
     <div class="dropdown-window">
       <slot />
       <button
@@ -21,11 +24,15 @@ const emits = defineEmits(['close'])
 const props = defineProps({
   opened: { type: Boolean, required: true }
 })
+
+watch(() => props.opened, (value) => {
+  if (value) document.body.classList.add('lock-scroll');
+  else document.body.classList.remove('lock-scroll');
+})
 </script>
 
 <style lang="scss" scoped>
 .dropdown {
-  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -36,16 +43,13 @@ const props = defineProps({
   transition: background-color calc($transition-time * 2);
   pointer-events: none;
 
-  @include bp-md {
-    display: block;
-  }
-
   &-window {
     position: absolute;
     top: rem(4);
     bottom: rem(4);
     right: 0;
     width: 75%;
+    max-width: rem(725);
     padding: rem(80) rem(40);
     background-color: $color-background;
     border-radius: $border-radius-block 0 0 $border-radius-block;
@@ -63,6 +67,14 @@ const props = defineProps({
     top: rem(20);
     right: rem(20);
     filter: invert(1);
+  }
+
+  &-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 }
 

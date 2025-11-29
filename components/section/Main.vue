@@ -1,9 +1,3 @@
-<script setup lang="js">
-const { main } = useSiteContent()
-
-const cards = computed(() => main.value?.cards || [])
-</script>
-
 <template>
   <div class="main content">
     <div class="main-about">
@@ -25,8 +19,8 @@ const cards = computed(() => main.value?.cards || [])
     >
       <h3 v-html="main.compliance.title" />
       <Button
-        :to="main.compliance.buttonLink"
         class="main-button"
+        @click="emits('open-form')"
       >
         {{ main.compliance.button }}
       </Button>
@@ -46,6 +40,13 @@ const cards = computed(() => main.value?.cards || [])
   </div>
 </template>
 
+<script setup lang="js">
+const emits = defineEmits(['open-form'])
+
+const { main } = useSiteContent()
+
+const cards = computed(() => main.value?.cards || [])
+</script>
 
 <style lang="scss">
 .main {

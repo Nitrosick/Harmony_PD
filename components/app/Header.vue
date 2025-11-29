@@ -25,11 +25,6 @@
 
 <script setup>
 const menuOpened = ref(false)
-
-watch(menuOpened, (value) => {
-  if (value) document.body.classList.add('lock-scroll');
-  else document.body.classList.remove('lock-scroll');
-})
 </script>
 
 <style lang="scss" scoped>

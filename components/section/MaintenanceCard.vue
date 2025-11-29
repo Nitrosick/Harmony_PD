@@ -23,9 +23,9 @@
       v-html="text"
     />
     <Button
-      to="#"
       class="maintenance-card-button"
       :theme="dark ? 'light' : 'dark'"
+      @click="emits('open-form')"
     >
       Оставить заявку
     </Button>
@@ -33,6 +33,9 @@
 </template>
 
 <script setup>
+const emits = defineEmits(['open-form'])
+// FIXME: Можно передавать параметр для уровня сопровождения
+
 const props = defineProps({
   title: { type: String, required: true },
   text: { type: [String, Array], required: true },

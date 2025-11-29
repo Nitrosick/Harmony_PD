@@ -32,7 +32,7 @@ body.lock-scroll {
 
 a {
   text-decoration: none;
-  color: $color-text;
+  color: var(--color-accent-blue);
   cursor: pointer;
 }
 

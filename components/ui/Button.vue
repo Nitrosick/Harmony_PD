@@ -24,6 +24,7 @@
       :to="to"
       :download="download"
       :target="target"
+      :type="type"
       class="button"
       :class="{
         'button-light': theme === 'light',
@@ -43,6 +44,7 @@
 
 <script setup>
 const props = defineProps({
+  type: { type: String, default: 'button' },
   theme: { type: String, default: 'light' },
   icon: { type: String, default: null },
   href: { type: String, default: undefined },

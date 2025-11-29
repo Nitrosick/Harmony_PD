@@ -27,6 +27,7 @@ export default defineNuxtConfig({
   components: {
     dirs: [
       'components/ui',
+      'components/form',
       'components/app',
       'components/section'
     ]
@@ -36,7 +37,6 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          api: 'modern',
           silenceDeprecations: ['import'],
           additionalData: '@import "@/assets/style/variables.scss";'
         }

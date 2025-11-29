@@ -1,9 +1,3 @@
-<script setup lang="js">
-const { maintenance } = useSiteContent()
-
-const cards = computed(() => maintenance.value?.cards || [])
-</script>
-
 <template>
   <div class="maintenance content">
     <h2 v-html="maintenance.title" />
@@ -18,11 +12,19 @@ const cards = computed(() => maintenance.value?.cards || [])
         :title="card.title"
         :text="card.text"
         :dark="card.dark"
+        @open-form="emits('open-form')"
       />
     </div>
   </div>
 </template>
 
+<script setup>
+const emits = defineEmits(['open-form'])
+
+const { maintenance } = useSiteContent()
+
+const cards = computed(() => maintenance.value?.cards || [])
+</script>
 
 <style lang="scss" scoped>
 .maintenance {
