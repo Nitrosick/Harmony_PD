@@ -1,7 +1,6 @@
 <script setup lang="js">
 const { main } = useSiteContent()
 
-// карточки для нижнего блока (иконки + текст)
 const cards = computed(() => main.value?.cards || [])
 </script>
 

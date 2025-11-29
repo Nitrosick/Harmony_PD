@@ -1,6 +1,3 @@
-import { ref, computed, onMounted } from 'vue'
-
-// Ñîñòîÿíèå — ïî óìîë÷àíèþ ÏÓÑÒÛÅ ÎÁÚÅÊÒÛ, à íå null
 const loading = ref(false)
 const loaded = ref(false)
 const error = ref(null)
@@ -14,17 +11,13 @@ const header = ref({})
 const questions = ref({})
 const contactModal = ref({})
 
-async function safeJson (url) {
+const safeJson = async (url) => {
   const res = await fetch(url)
-
-  if (!res.ok) {
-    throw new Error(`Failed to load ${url}: ${res.status} ${res.statusText}`)
-  }
-
+  if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status} ${res.statusText}`)
   return res.json()
 }
 
-async function loadContent () {
+const loadContent = async () => {
   if (loaded.value || loading.value) return
 
   loading.value = true

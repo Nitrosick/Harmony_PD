@@ -1,13 +1,8 @@
 ﻿<script setup lang="js">
-import { ref, reactive, watch } from 'vue'
-
 const { contactModal } = useSiteContent()
 
 const props = defineProps({
-  open: {
-    type: Boolean,
-    default: false
-  }
+  open: { type: Boolean, default: false }
 })
 
 const emit = defineEmits(['update:open'])
