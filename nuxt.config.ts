@@ -3,8 +3,6 @@ const title = 'Harmony Technologies PD'
 export default defineNuxtConfig({
   compatibilityDate: '2025-11-05',
   devtools: { enabled: true },
-
-  //добавляем клиентский режим и статическую генерацию
   ssr: false,
 
   nitro: {
@@ -12,7 +10,7 @@ export default defineNuxtConfig({
   },
 
   app: {
-    baseURL: '/', // сайт в корне домена
+    baseURL: '/',
     head: {
       charset: 'utf-8',
       title: title,

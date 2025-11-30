@@ -25,9 +25,11 @@ const props = defineProps({
   opened: { type: Boolean, required: true }
 })
 
+const { lock, unlock } = useScrollLock()
+
 watch(() => props.opened, (value) => {
-  if (value) document.body.classList.add('lock-scroll');
-  else document.body.classList.remove('lock-scroll');
+  if (value) lock()
+  else unlock()
 })
 </script>
 
