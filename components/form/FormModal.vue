@@ -113,11 +113,11 @@ const onSubmit = async () => {
 
   try {
     const body = new URLSearchParams()
-    body.append('organization', state.organization)
-    body.append('contact_person', state.contact_person)
-    body.append('phone', state.phone)
-    body.append('email', state.email)
-    body.append('request', state.request)
+    body.append('organization', state.value.organization)
+    body.append('contact_person', state.value.contact_person)
+    body.append('phone', state.value.phone)
+    body.append('email', state.value.email)
+    body.append('request', state.value.request)
     body.append('agree', '1')
 
     const res = await fetch('/contact.php', {
