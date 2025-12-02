@@ -1,10 +1,10 @@
 {
-  "companyName": "ООО&nbsp;«Harmony&nbsp;Technologies»",
+  "companyName": "ООО&nbsp;«Хармони&nbsp;Текнолоджиз»",
   "innLabel": "ИНН",
   "addressLabel": "Юридический адрес",
-  "inn": "",
-  "address": "",
-  "phone": "+7 111 111 222",
+  "inn": "9717150655",
+  "address": "129226, г. Москва, Мира пр-т, д. 131, помещ. 3/1",
+  "phone": "+7 903 61-001-61",
   "menu": [
     {
       "id": "about",
@@ -31,12 +31,12 @@
     {
       "id": "consent",
       "to": "#",
-      "text": "Согласие на&nbsp;обработку персональных данных"
+      "text": ""
     },
     {
       "id": "standard",
       "to": "#",
-      "text": "Стандарт обращения с&nbsp;персональными данными"
+      "text": ""
     }
   ]
 }
