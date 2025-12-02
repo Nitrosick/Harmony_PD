@@ -8,6 +8,7 @@
       :disabled="disabled"
       class="input"
       :class="{ 'input-incorrect': error }"
+      @input="emits('input', $event)"
     >
     <span
       v-show="model"
@@ -32,6 +33,7 @@
 
 <script setup>
 const model = defineModel()
+const emits = defineEmits(['input'])
 
 const props = defineProps({
   type: { type: String, default: 'text' },

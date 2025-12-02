@@ -19,26 +19,29 @@
       :placeholder="contactModal.fields.organization.placeholder"
       :disabled="loading"
       required
+      :error="errors.organization"
     />
     <Input
       v-model="state.contact_person"
       :placeholder="contactModal.fields.contact_person.placeholder"
       :disabled="loading"
       required
+      :error="errors.contact_person"
     />
     <Input
       v-model="state.phone"
-      type="tel"
       :placeholder="contactModal.fields.phone.placeholder"
       :disabled="loading"
       required
+      :error="errors.phone"
+      @input="onPhoneInput"
     />
     <Input
       v-model="state.email"
-      type="email"
       :placeholder="contactModal.fields.email.placeholder"
       :disabled="loading"
       required
+      :error="errors.email"
     />
     <Textarea
       v-model="state.request"
@@ -46,6 +49,7 @@
       :hint="contactModal.fields.request.hint"
       :disabled="loading"
       required
+      :error="errors.request"
     />
     <Checkbox
       v-model="agreement"
@@ -55,10 +59,10 @@
 
     <div class="form-modal-control">
       <div
-        v-if="error"
+        v-if="errors.common"
         class="form-modal-error"
       >
-        {{ error }}
+        {{ errors.common }}
       </div>
       <Button
         class="questions-button"
@@ -92,24 +96,36 @@ const initial = {
 
 const state = ref({ ...initial })
 const loading = ref(false)
-const error = ref(null)
+const errors = ref({})
 const success = ref(false)
 const agreement = ref(false)
 
-watch(() => state, () => { error.value = null }, { deep: true })
-watch(agreement, () => { error.value = null })
+watch(() => state, () => { errors.value = {} }, { deep: true })
+watch(agreement, () => { errors.value = {} })
 watch(() => props.opened, () => { reset() })
+
+const onPhoneInput = (e) => {
+  const input = e.target
+  const allowed = /[0-9()+\- ]/g
+  const cleaned = (input.value.match(allowed) || []).join('')
+  state.value.phone = cleaned
+}
 
 const onSubmit = async () => {
   const cfg = contactModal.value
 
   if (!agreement.value) {
-    error.value = cfg.messages.errorDefault
+    errors.value.common = cfg.error.default
+    return
+  }
+
+  if (!/^[\p{L}0-9._%+-]+@[\p{L}0-9.-]+\.[\p{L}]{2,}$/u.test(state.value.email)) {
+    errors.value.email = cfg.error.email
     return
   }
 
   loading.value = true
-  error.value = null
+  errors.value = {}
 
   try {
     const body = new URLSearchParams()
@@ -132,10 +148,10 @@ const onSubmit = async () => {
       reset()
       success.value = true
     } else {
-      error.value = text.replace(/^ERR:\s*/i, '') || cfg.messages.errorDefault
+      errors.value.common = text.replace(/^ERR:\s*/i, '') || cfg.error.default
     }
   } catch (e) {
-    error.value = contactModal.value?.messages?.errorNetwork || 'Ошибка'
+    errors.value.common = cfg.error.network
   } finally {
     loading.value = false
   }
@@ -143,7 +159,7 @@ const onSubmit = async () => {
 
 const reset = () => {
   success.value = false
-  error.value = null
+  errors.value = {}
   state.value = { ...initial }
   agreement.value = false
 }
