@@ -29,7 +29,7 @@ const cards = computed(() => {
         class="services-row"
       >
         <h3 v-html="services.sections?.technical?.title" />
-        <ServicesCard
+        <MainServicesCard
           v-for="(card, i) in cards.technical"
           :key="i"
           :icon="card.icon"
@@ -43,7 +43,7 @@ const cards = computed(() => {
         class="services-row"
       >
         <h3 v-html="services.sections?.legal?.title" />
-        <ServicesCard
+        <MainServicesCard
           v-for="(card, i) in cards.legal"
           :key="i"
           :icon="card.icon"
@@ -57,7 +57,7 @@ const cards = computed(() => {
         class="services-row"
       >
         <h3 v-html="services.sections?.outsourcing?.title" />
-        <ServicesCard
+        <MainServicesCard
           v-for="(card, i) in cards.outsourcing"
           :key="i"
           :icon="card.icon"

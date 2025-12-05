@@ -48,7 +48,7 @@ onBeforeUnmount(() => {
           ref="slider"
           class="sphere-slider-items"
         >
-          <SphereCard
+          <MainSphereCard
             v-for="(card, i) in cards"
             :key="i"
             :icon="card.icon"

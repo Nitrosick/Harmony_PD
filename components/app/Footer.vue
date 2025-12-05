@@ -1,17 +1,8 @@
-<script setup lang="js">
-const { footer } = useSiteContent()
-
-const phoneHref = computed(() => {
-  const f = footer.value
-  if (f && f.phone) {
-    return f.phone.replaceAll(' ', '')
-  }
-  return ''
-})
-</script>
-
 <template>
-  <footer class="footer content">
+  <footer
+    v-if="footer"
+    class="footer content"
+  >
     <Logo class="footer-logo" />
 
     <section
@@ -20,11 +11,11 @@ const phoneHref = computed(() => {
     >
       <span v-html="footer.companyName" />
       <span>
-        {{ footer.innLabel }}
+        {{ footer.innLabel }}:
         {{ footer.inn }}
       </span>
       <span>
-        {{ footer.addressLabel }}
+        {{ footer.addressLabel }}:
         {{ footer.address }}
       </span>
       <a :href="`tel:${phoneHref}`">
@@ -33,7 +24,7 @@ const phoneHref = computed(() => {
     </section>
 
     <section
-      v-if="footer.menu?.length"
+      v-if="footer.menu.length"
       class="footer-block"
     >
       <NuxtLink
@@ -45,7 +36,7 @@ const phoneHref = computed(() => {
     </section>
 
     <section
-      v-if="footer.policyLinks?.length"
+      v-if="footer.policyLinks.length"
       class="footer-block footer-policy"
     >
       <NuxtLink
@@ -58,7 +49,17 @@ const phoneHref = computed(() => {
   </footer>
 </template>
 
+<script setup lang="js">
+const { footer } = useSiteContent()
 
+const phoneHref = computed(() => {
+  const f = footer.value
+  if (f && f.phone) {
+    return f.phone.replaceAll(' ', '')
+  }
+  return ''
+})
+</script>
 
 <style lang="scss">
 .footer {

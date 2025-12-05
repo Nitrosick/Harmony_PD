@@ -6,7 +6,7 @@
       v-if="cards.length"
       class="maintenance-list"
     >
-      <MaintenanceCard
+      <MainMaintenanceCard
         v-for="(card, i) in cards"
         :key="i"
         :title="card.title"

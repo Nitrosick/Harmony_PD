@@ -2,14 +2,15 @@ const loading = ref(false)
 const loaded = ref(false)
 const error = ref(null)
 
-const main = ref({})
-const sphere = ref({})
-const services = ref({})
-const maintenance = ref({})
-const footer = ref({})
-const header = ref({})
-const questions = ref({})
-const contactModal = ref({})
+const main = ref(null)
+const sphere = ref(null)
+const services = ref(null)
+const maintenance = ref(null)
+const footer = ref(null)
+const header = ref(null)
+const questions = ref(null)
+const contactModal = ref(null)
+const about = ref(null)
 
 const safeJson = async (url) => {
   const res = await fetch(url)
@@ -18,7 +19,7 @@ const safeJson = async (url) => {
 }
 
 const loadContent = async () => {
-  if (loaded.value || loading.value) return
+  if (loaded.value) return
 
   loading.value = true
   error.value = null
@@ -32,7 +33,8 @@ const loadContent = async () => {
       footerData,
       headerData,
       questionsData,
-      contactModalData
+      contactModalData,
+      aboutData
     ] = await Promise.all([
       safeJson('/content/main.json'),
       safeJson('/content/sphere.json'),
@@ -41,17 +43,19 @@ const loadContent = async () => {
       safeJson('/content/footer.json'),
       safeJson('/content/header.json'),
       safeJson('/content/questions.json'),
-      safeJson('/content/contactModal.json')
+      safeJson('/content/contactModal.json'),
+      safeJson('/content/about.json')
     ])
 
-    main.value = mainData || {}
-    sphere.value = sphereData || {}
-    services.value = servicesData || {}
-    maintenance.value = maintenanceData || {}
-    footer.value = footerData || {}
-    header.value = headerData || {}
-    questions.value = questionsData || {}
-    contactModal.value = contactModalData || {}
+    main.value = mainData
+    sphere.value = sphereData
+    services.value = servicesData
+    maintenance.value = maintenanceData
+    footer.value = footerData
+    header.value = headerData
+    questions.value = questionsData
+    contactModal.value = contactModalData
+    about.value = aboutData
 
     loaded.value = true
   } catch (e) {
@@ -74,6 +78,7 @@ export function useSiteContent () {
     header: computed(() => header.value),
     questions: computed(() => questions.value),
     contactModal: computed(() => contactModal.value),
+    about: computed(() => about.value),
 
     loading: computed(() => loading.value),
     loaded: computed(() => loaded.value),

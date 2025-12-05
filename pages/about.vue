@@ -1,16 +1,9 @@
 <template>
-  <div>
-    <Main
-      @open-form="modalOpened = true"
-    />
-    <MainSphere id="sphere" />
-    <MainServices id="services" />
-    <MainMaintenance
-      id="maintenance"
-      @open-form="modalOpened = true"
-    />
-    <MainQuestions
-      id="questions"
+  <div class="about content">
+    <AboutHead />
+    <AboutFounder />
+    <AboutPrinciples />
+    <AboutContact
       @open-form="modalOpened = true"
     />
     <Dropdown
@@ -27,3 +20,9 @@
 <script setup>
 const modalOpened = ref(false)
 </script>
+
+<style lang="scss">
+.about {
+  margin-top: rem(16);
+}
+</style>

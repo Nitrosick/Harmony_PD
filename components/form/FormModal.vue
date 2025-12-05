@@ -1,82 +1,84 @@
 <template>
-  <div
-    v-if="success"
-    class="form-modal-sended"
-  >
-    <h3>{{ contactModal.messages.success }}</h3>
-  </div>
-  <form
-    v-else-if="contactModal.title"
-    class="form-modal"
-    @submit.prevent="onSubmit"
-  >
-    <h3 class="form-modal-title">
-      Оставить заявку
-    </h3>
-
-    <Input
-      v-model="state.organization"
-      :placeholder="contactModal.fields.organization.placeholder"
-      :disabled="loading"
-      required
-      :error="errors.organization"
-    />
-    <Input
-      v-model="state.contact_person"
-      :placeholder="contactModal.fields.contact_person.placeholder"
-      :disabled="loading"
-      required
-      :error="errors.contact_person"
-    />
-    <Input
-      v-model="state.phone"
-      :placeholder="contactModal.fields.phone.placeholder"
-      :disabled="loading"
-      required
-      :error="errors.phone"
-      @input="onPhoneInput"
-    />
-    <Input
-      v-model="state.email"
-      :placeholder="contactModal.fields.email.placeholder"
-      :disabled="loading"
-      required
-      :error="errors.email"
-    />
-    <Textarea
-      v-model="state.request"
-      :placeholder="contactModal.fields.request.placeholder"
-      :hint="contactModal.fields.request.hint"
-      :disabled="loading"
-      required
-      :error="errors.request"
-    />
-    <Checkbox
-      v-model="agreement"
-      :label="contactModal.consent"
-      :disabled="loading"
-    />
-
-    <div class="form-modal-control">
-      <div
-        v-if="errors.common"
-        class="form-modal-error"
-      >
-        {{ errors.common }}
-      </div>
-      <Button
-        class="questions-button"
-        type="submit"
-        theme="dark"
-      >
-        {{
-          loading
-            ? contactModal.messages.submitting
-            : contactModal.messages.submit
-        }}
-      </Button>
+  <template v-if="contactModal">
+    <div
+      v-if="success"
+      class="form-modal-sended"
+    >
+      <h3>{{ contactModal.messages.success }}</h3>
     </div>
-  </form>
+    <form
+      v-else
+      class="form-modal"
+      @submit.prevent="onSubmit"
+    >
+      <h3 class="form-modal-title">
+        Оставить заявку
+      </h3>
+
+      <Input
+        v-model="state.organization"
+        :placeholder="contactModal.fields.organization.placeholder"
+        :disabled="loading"
+        required
+        :error="errors.organization"
+      />
+      <Input
+        v-model="state.contact_person"
+        :placeholder="contactModal.fields.contact_person.placeholder"
+        :disabled="loading"
+        required
+        :error="errors.contact_person"
+      />
+      <Input
+        v-model="state.phone"
+        :placeholder="contactModal.fields.phone.placeholder"
+        :disabled="loading"
+        required
+        :error="errors.phone"
+        @input="onPhoneInput"
+      />
+      <Input
+        v-model="state.email"
+        :placeholder="contactModal.fields.email.placeholder"
+        :disabled="loading"
+        required
+        :error="errors.email"
+      />
+      <Textarea
+        v-model="state.request"
+        :placeholder="contactModal.fields.request.placeholder"
+        :hint="contactModal.fields.request.hint"
+        :disabled="loading"
+        required
+        :error="errors.request"
+      />
+      <Checkbox
+        v-model="agreement"
+        :label="contactModal.consent"
+        :disabled="loading"
+      />
+
+      <div class="form-modal-control">
+        <div
+          v-if="errors.common"
+          class="form-modal-error"
+        >
+          {{ errors.common }}
+        </div>
+        <Button
+          class="questions-button"
+          type="submit"
+          theme="dark"
+        >
+          {{
+            loading
+              ? contactModal.messages.submitting
+              : contactModal.messages.submit
+          }}
+        </Button>
+      </div>
+    </form>
+  </template>
 </template>
 
 <script setup>
