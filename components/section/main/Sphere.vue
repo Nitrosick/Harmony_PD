@@ -33,7 +33,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="sphere content">
+  <div
+    v-if="sphere"
+    class="sphere content"
+  >
     <h2 v-html="sphere.title" />
     <p v-html="sphere.subtitle" />
 

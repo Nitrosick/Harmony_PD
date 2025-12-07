@@ -6,7 +6,6 @@
     <h2 v-html="questions.title" />
 
     <Button
-      v-if="questions.button"
       class="questions-button"
       theme="dark"
       @click="emits('open-form')"

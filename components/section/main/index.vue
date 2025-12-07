@@ -1,13 +1,14 @@
 <template>
-  <div class="main content">
+  <div
+    v-if="main"
+    class="main content"
+  >
     <div class="main-about">
       <h1
-        v-if="main?.hero?.title"
         class="main-title"
         v-html="main.hero.title"
       />
       <p
-        v-if="main?.hero?.text"
         class="main-text"
         v-html="main.hero.text"
       />

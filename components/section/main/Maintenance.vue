@@ -1,5 +1,8 @@
 <template>
-  <div class="maintenance content">
+  <div
+    v-if="maintenance"
+    class="maintenance content"
+  >
     <h2 v-html="maintenance.title" />
 
     <div

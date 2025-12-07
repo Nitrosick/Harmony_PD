@@ -18,7 +18,7 @@
         {{ footer.addressLabel }}:
         {{ footer.address }}
       </span>
-      <a :href="`tel:${phoneHref}`">
+      <a :href="`tel:${footer.phone}`">
         {{ footer.phone }}
       </a>
     </section>
@@ -51,14 +51,6 @@
 
 <script setup lang="js">
 const { footer } = useSiteContent()
-
-const phoneHref = computed(() => {
-  const f = footer.value
-  if (f && f.phone) {
-    return f.phone.replaceAll(' ', '')
-  }
-  return ''
-})
 </script>
 
 <style lang="scss">

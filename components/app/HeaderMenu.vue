@@ -1,13 +1,8 @@
-<script setup>
-const emits = defineEmits(['close'])
-
-const { header } = useSiteContent()
-
-const menuItems = computed(() => header.value?.menu || [])
-</script>
-
 <template>
-  <nav class="menu">
+  <nav
+    v-if="header"
+    class="menu"
+  >
     <NuxtLink
       v-for="item in menuItems"
       :key="item.id"
@@ -20,7 +15,13 @@ const menuItems = computed(() => header.value?.menu || [])
   </nav>
 </template>
 
+<script setup>
+const emits = defineEmits(['close'])
 
+const { header } = useSiteContent()
+
+const menuItems = computed(() => header.value?.menu || [])
+</script>
 
 <style lang="scss" scoped>
 .menu {
